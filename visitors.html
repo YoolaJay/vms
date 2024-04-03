@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
+    <link rel="stylesheet" href="style.css">
+
+    <title>Visitor Management System</title>
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <input type="checkbox" name="" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <h2>
+                <span class="las la-home">
+
+                </span>
+                <span>
+                    UPSA
+                </span>
+            </h2>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="/dashboard.html">
+                        <span class="las la-columns"></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/visitors.html" class="active">
+                        <span class="las la-user-friends"></span>
+                        <span>Visitors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/report.html">
+                        <span class="las la-file-alt"></span>
+                        <span>Report</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sign-out">
+            <a href="login.html">
+                <span class="las la-sign-out-alt"></span>
+                <span>Sign Out</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="las la-user-friends"></span>
+                </label>
+                Visitors
+            </h2>
+
+
+            <div class="user-wrapper">
+                    <div class="las la-user user"></div>
+                    <h4>
+                        Gerald
+                    </h4>
+            </div>
+        </header>
+
+        <main>
+            <div class="recent">
+                <div class="visitors">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Visitors List</h3>
+
+                            <div class="search-wrapper">
+                                <span class="las la-search"></span>
+                                <input type="search" placeholder="Search here">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary" onclick="openModal()">Add a new visitor</button>
+                        </div>
+
+                        <div class="card-body">
+                            <table width="100%" class="visitors-table">
+                                <thead>
+                                    <tr>
+                                        <td>First Name</td>
+                                        <td>Last Name</td>
+                                        <td>Phone Number</td>
+                                        <td>Visitee</td>
+                                        <td>Time In</td>
+                                        <td>Time Out</td>
+                                        <td>Actions</td>
+                                        <td>Check Out</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <tr>
+                                        <td>Greald</td>
+                                        <td>Ofoe</td>
+                                        <td>0232212342</td>
+                                        <td>11:02 am</td>
+                                        <td>pending</td>
+                                        <td>
+                                            <button class="action-btn edit-btn">
+                                                <span class="las la-pen"></span>
+                                            </button>
+                                            
+                                            <button class="action-btn delete-btn">
+                                                <span class="las la-trash-alt"></span>
+                                            </button>
+                                            
+                                        </td>
+                                        <td>
+                                            <button>
+                                                Check Out
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Greald</td>
+                                        <td>Ofoe</td>
+                                        <td>0232212342</td>
+                                        <td>11:02 am</td>
+                                        <td>pending</td>
+                                        <td>
+                                            <button class="action-btn edit-btn">
+                                                <span class="las la-pen"></span>
+                                            </button>
+                                            
+                                            <button class="action-btn delete-btn">
+                                                <span class="las la-trash-alt"></span>
+                                            </button>
+                                            
+                                        </td>
+                                        <td>
+                                            <button>
+                                                Check Out
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Greald</td>
+                                        <td>Ofoe</td>
+                                        <td>0232212342</td>
+                                        <td>11:02 am</td>
+                                        <td>pending</td>
+                                        <td>
+                                            <button class="action-btn edit-btn">
+                                                <span class="las la-pen"></span>
+                                            </button>
+                                            
+                                            <button class="action-btn delete-btn">
+                                                <span class="las la-trash-alt"></span>
+                                            </button>
+                                            
+                                        </td>
+                                        <td>
+                                            <button>
+                                                Check Out
+                                            </button>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-wrapper" id="visitorModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Add New Visitor</h3>
+                    <button type="button" class="close" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="visitorForm">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="visitee">Visitee</label>
+                            <input type="text" class="form-control" id="visitee" name="visitee" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeIn">Time In</label>
+                            <input type="text" class="form-control" id="timeIn" name="timeIn"  disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeOut">Time Out</label>
+                            <input type="text" class="form-control" id="timeOut" name="timeOut" value="pending" disabled>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addVisitor()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-wrapper" id="editModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Edit Visitor</h3>
+                    <button type="button" class="close" onclick="closeEditModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="editVisitorForm" data-id="">
+                        <div class="form-group">
+                            <label for="editFirstName">First Name</label>
+                            <input type="text" class="form-control" id="editFirstName" name="firstName" >
+                        </div>
+                        <div class="form-group">
+                            <label for="editLastName">Last Name</label>
+                            <input type="text" class="form-control" id="editLastName" name="lastName" >
+                        </div>
+                        <div class="form-group">
+                            <label for="editPhoneNumber">Phone Number</label>
+                            <input type="tel" class="form-control" id="editPhoneNumber" name="phoneNumber" >
+                        </div>
+                        <div class="form-group">
+                            <label for="editVisitee">Visitee</label>
+                            <input type="text" class="form-control" id="editVisitee" name="visitee" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editTimeIn">Time In</label>
+                            <input type="text" class="form-control" id="editTimeIn" name="timeIn" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="editTimeOut">Time Out</label>
+                            <input type="text" class="form-control" id="editTimeOut" name="timeOut" value="pending" disabled>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeEdittModal()">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="updateVisitor(this.parentNode.parentNode)">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal-wrapper" id="confirmationModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Delete Visitor</h3>
+                    <button type="button" class="close" onclick="closeConfirmModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this visitor?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="confirmDeleteBtn">Yes</button>
+                    <button type="button" class="btn btn-primary" id="cancelDeleteBtn" onclick="closeConfirmModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Checkout Modal -->
+    <div class="modal-wrapper" id="checkoutModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Checkout Visitor</h3>
+                    <button type="button" class="close" onclick="closeCheckoutModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label for="checkoutFirstName">First Name</label>
+                            <input type="text" class="form-control" id="checkoutFirstName" name="firstName" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutLastName">Last Name</label>
+                            <input type="text" class="form-control" id="checkoutLastName" name="lastName" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutPhoneNumber">Phone Number</label>
+                            <input type="tel" class="form-control" id="checkoutPhoneNumber" name="phoneNumber" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutVisitee">Visitee</label>
+                            <input type="text" class="form-control" id="checkoutVisitee" name="visitee" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutTimeIn">Time In</label>
+                            <input type="text" class="form-control" id="checkoutTimeIn" name="timeIn" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutTimeOut">Time Out</label>
+                            <input type="text" class="form-control" id="currentTime" name="timeOut" value="pending" disabled>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeCheckoutModal()">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="checkoutVisitor()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="visitors.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
+</body>
+</html>
